@@ -35,6 +35,9 @@ namespace csvFileSelectorProject
             this.txtResults = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.lblFileLabel = new System.Windows.Forms.Label();
+            this.lblFileName = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,7 +45,7 @@ namespace csvFileSelectorProject
             // 
             this.btnFileSelect.BackColor = System.Drawing.SystemColors.Info;
             this.btnFileSelect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnFileSelect.Location = new System.Drawing.Point(269, 96);
+            this.btnFileSelect.Location = new System.Drawing.Point(213, 98);
             this.btnFileSelect.Name = "btnFileSelect";
             this.btnFileSelect.Size = new System.Drawing.Size(190, 61);
             this.btnFileSelect.TabIndex = 1;
@@ -80,12 +83,44 @@ namespace csvFileSelectorProject
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             // 
+            // lblFileLabel
+            // 
+            this.lblFileLabel.AutoSize = true;
+            this.lblFileLabel.Location = new System.Drawing.Point(190, 182);
+            this.lblFileLabel.Name = "lblFileLabel";
+            this.lblFileLabel.Size = new System.Drawing.Size(67, 20);
+            this.lblFileLabel.TabIndex = 4;
+            this.lblFileLabel.Text = "File Path:";
+            // 
+            // lblFileName
+            // 
+            this.lblFileName.AutoSize = true;
+            this.lblFileName.Location = new System.Drawing.Point(275, 182);
+            this.lblFileName.Name = "lblFileName";
+            this.lblFileName.Size = new System.Drawing.Size(0, 20);
+            this.lblFileName.TabIndex = 5;
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.SystemColors.Info;
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnReset.Location = new System.Drawing.Point(409, 98);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(190, 61);
+            this.btnReset.TabIndex = 6;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.lblFileName);
+            this.Controls.Add(this.lblFileLabel);
             this.Controls.Add(this.txtResults);
             this.Controls.Add(this.lblResults);
             this.Controls.Add(this.btnFileSelect);
@@ -105,6 +140,9 @@ namespace csvFileSelectorProject
         private System.Windows.Forms.TextBox txtResults;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.Label lblFileName;
+        private System.Windows.Forms.Label lblFileLabel;
+        private System.Windows.Forms.Button btnReset;
     }
 }
 

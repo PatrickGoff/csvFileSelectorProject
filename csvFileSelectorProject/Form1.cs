@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,7 +31,8 @@ namespace csvFileSelectorProject
         Excel.Worksheet xlWorksheet;
         string sFileName;
         int iRow, iCol = 1;
-        double sum = 0;
+        BigInteger sum = 0;
+       
         
 
 
@@ -47,33 +50,55 @@ namespace csvFileSelectorProject
                 {
                     ReadExcel(sFileName);
                 }
+
+                lblFileName.Text = sFileName;
             }
         }
-   
-    
-        private void ReadExcel(string sFileName)
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void ReadExcel(string sFile)
         {
             xlApp = new Excel.Application();
-            xlWorkbook = xlApp.Workbooks.Open(sFileName);
-            xlWorksheet = xlApp.Worksheets["ExampleCSV"];
+            xlWorkbook = xlApp.Workbooks.Open(sFile);
+            xlWorksheet = xlApp.ActiveWorkbook.Sheets[1];
+         
+            Excel.Range xlRng = xlWorksheet.Range["A:A"];
+           
 
-            for (iRow = 1; iRow <= xlWorksheet.Rows.Count; iRow++)  // START FROM THE FIRST ROW.
+            for (iRow = 1; iRow <= xlWorksheet.UsedRange.Rows.Count; iRow++)  // START FROM THE FIRST ROW.
             {
-                if (xlWorksheet.Cells[iRow, 1].value == null)
-                {
-                    break;      // BREAK LOOP.
-                }
-                else
-                {
-                    
-                    txtResults.Text = sum.ToString();
-                }
+                
+                string excelValue = xlWorksheet.Cells[iRow, iCol].value == null
+                 ? MessageBox.Show("The first cell in column A is empty.")
+                 : xlWorksheet.Cells[iRow, iCol].value.ToString();
+                  excelValue = excelValue.Replace("'", " ");
+
+
+
+                sum += BigInteger.TryParse(excelValue, out BigInteger _)
+                ? BigInteger.Parse(excelValue)
+                : 0;
+
+
+
+
+
             }
 
-            xlWorkbook.Close();
-            xlApp.Quit();
+            String digits = sum.ToString();
+           string digit = digits.Substring(Math.Max(0, digits.Length - 10));
 
 
+
+                txtResults.Text = digit;
+                xlWorkbook.Close();
+                xlApp.Quit();
+
+            //}
         }
     
     
